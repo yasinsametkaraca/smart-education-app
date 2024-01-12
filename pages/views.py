@@ -20,6 +20,7 @@ class IndexView(TemplateView):
         context['total_teachers'] = Teacher.objects.count()
         return context
 
+
 #def index(request):
 #    return render(request, 'index.html')
 

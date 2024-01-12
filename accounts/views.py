@@ -7,7 +7,6 @@ from courses.models import Course
 from django.contrib.auth.models import User
 
 
-
 def user_login(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)
@@ -31,7 +30,7 @@ def user_login(request):
     else:
         form = LoginForm()
 
-    return render(request, 'login.html', {'form':form})
+    return render(request, 'login.html', {'form': form})
 
 
 def user_register(request):
@@ -66,16 +65,18 @@ def user_dashboard(request):
 
     return render(request, 'dashboard.html', context)
 
+
 def enroll_the_course(request):
     course_id = request.POST['course_id']
     user_id = request.POST['user_id']
-    course = Course.objects.get(id = course_id)
-    user = User.objects.get(id = user_id)
+    course = Course.objects.get(id=course_id)
+    user = User.objects.get(id=user_id)
     course.students.add(user)
     return redirect('dashboard')
 
+
 def release_the_course(request):
-    course = Course.objects.get(id = request.POST['course_id'])
-    user = User.objects.get(id = request.POST['user_id'])
+    course = Course.objects.get(id=request.POST['course_id'])
+    user = User.objects.get(id=request.POST['user_id'])
     course.students.remove(user)
     return redirect('dashboard')
