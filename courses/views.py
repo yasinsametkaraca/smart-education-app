@@ -62,15 +62,16 @@ def course_detail(request, category_slug, course_id):
 
     return render(request, 'course.html', context)
 
+
 def search(request):
-    courses = Course.objects.filter(name__contains = request.GET['search'])
+    courses = Course.objects.filter(name__contains=request.GET['search'])
     categories = Category.objects.all()
-    tags= Tag.objects.all()
+    tags = Tag.objects.all()
 
     context = {
         'courses': courses,
         'categories': categories,
-        'tags':tags
+        'tags': tags
     }
 
     return render(request, 'courses.html', context)

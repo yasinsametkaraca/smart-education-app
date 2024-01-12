@@ -23,11 +23,13 @@ class IndexView(TemplateView):
 #def index(request):
 #    return render(request, 'index.html')
 
+
 class AboutView(TemplateView):
     template_name = 'about.html'
 
 #def about(request):
 #   return render(request, 'about.html')
+
 
 class ContactView(SuccessMessageMixin, FormView):
     template_name = 'contact.html'

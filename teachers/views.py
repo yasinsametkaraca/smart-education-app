@@ -4,6 +4,7 @@ from django.views.generic.detail import DetailView
 from teachers.models import Teacher
 from courses.models import Course
 
+
 class TeacherListView(ListView):
     model = Teacher
     template_name = 'teachers.html'
@@ -14,6 +15,7 @@ class TeacherListView(ListView):
     #def get_queryset(self):
         #return Teacher.objects.all()[:2]
 
+
 class TeacherDetailView(DetailView):
     model = Teacher
     template_name = 'teacher.html'
@@ -21,5 +23,5 @@ class TeacherDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['courses'] = Course.objects.filter(available=True, teacher = self.kwargs['pk'])
+        context['courses'] = Course.objects.filter(available=True, teacher=self.kwargs['pk'])
         return context
