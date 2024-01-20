@@ -2,7 +2,6 @@ from django.shortcuts import render, get_object_or_404
 from . models import Course, Category, Tag
 
 
-
 def course_list(request, category_slug=None, tag_slug=None):
     category_page = None
     tag_page = None
@@ -12,7 +11,7 @@ def course_list(request, category_slug=None, tag_slug=None):
 
     if category_slug != None:
         category_page = get_object_or_404(Category, slug=category_slug)
-        courses = Course.objects.filter(available=True, category= category_page)
+        courses = Course.objects.filter(available=True, category=category_page)
 
     elif tag_slug != None:
         tag_page = get_object_or_404(Tag, slug=tag_slug)
@@ -24,7 +23,7 @@ def course_list(request, category_slug=None, tag_slug=None):
             enrolled_courses = current_user.courses_joined.all()
             courses = Course.objects.all().order_by('-date')
             for course in enrolled_courses:
-                courses = courses.exclude(id = course.id)
+                courses = courses.exclude(id=course.id)
 
         else:
             courses = Course.objects.all().order_by('-date')
@@ -32,11 +31,10 @@ def course_list(request, category_slug=None, tag_slug=None):
     context = {
         'courses': courses,
         'categories': categories,
-        'tags':tags
+        'tags': tags
     }
 
     return render(request, 'courses.html', context)
-
 
 
 def course_detail(request, category_slug, course_id):
